@@ -40,6 +40,7 @@ public final class GetCustomItem extends JavaPlugin {
     @Getter
     private FileManager fileManager;
 
+    @Getter
     private ItemManager itemManager;
     private MySQL mySQL;
     private ItemBagManager itemBagManager;

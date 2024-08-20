@@ -40,9 +40,8 @@ public class EffectRadiusListener implements Listener {
         this.fileManager = fileManager;
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
-        if(event.isCancelled()) return;
 
         Player player = event.getPlayer();
         ItemStack itemStack = event.getItem(); // using item

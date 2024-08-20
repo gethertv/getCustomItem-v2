@@ -64,6 +64,8 @@ public class CustomItemCommand {
     public void reloadConfig(@Context CommandSender commandSender) {
         //  reload config
         plugin.getFileManager().reload();
+        plugin.getFileManager().loadItems();
+        plugin.getItemManager().initItems();
         MessageUtil.sendMessage(commandSender, "#40ff76Successfully reloaded config!");
 
     }

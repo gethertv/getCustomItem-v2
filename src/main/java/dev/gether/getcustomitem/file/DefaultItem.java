@@ -1316,11 +1316,11 @@ public class DefaultItem {
                             Item.builder()
                                     .amount(1)
                                     .material(Material.FISHING_ROD)
-                                    .displayname("#f2ff69Stop flying")
+                                    .displayname("#f2ff69Anti-Elytra Rod")
                                     .lore(new ArrayList<>(
                                             List.of(
                                                     "&7",
-                                                    "#beff69× :)!",
+                                                    "#beff69Prevents Elytra use on hit!",
                                                     "&7",
                                                     "&7• Usage: #beff69{usage}",
                                                     "&7"
@@ -1337,25 +1337,38 @@ public class DefaultItem {
                                     .sound(Sound.UI_BUTTON_CLICK)
                                     .build(),
                             new ArrayList<>(
-                                    List.of("&7",
+                                    List.of(
+                                            "&7",
                                             "#78ff69 × Example YOURSELF!",
-                                            "&7")
+                                            "&7"
+                                    )
                             ),
                             new ArrayList<>(
-                                    List.of("&7",
+                                    List.of(
+                                            "&7",
                                             "#78ff69 × Example OPPONENTS!",
-                                            "&7")
+                                            "&7"
+                                    )
                             ),
-                            new TitleMessage(false, "&aTitle Yourself", "&7Subtitle", 10, 20, 10),
-                            new TitleMessage(false, "&aTitle opponents", "&7Subtitle", 10, 20, 10),
+                            new TitleMessage(
+                                    false,
+                                    "&aTitle Yourself",
+                                    "&7Subtitle",
+                                    10, 20, 10
+                            ),
+                            new TitleMessage(
+                                    false,
+                                    "&aTitle Opponents",
+                                    "&7Subtitle",
+                                    10, 20, 10
+                            ),
                             4,
                             1.7,
                             2.0,
                             15,
-                            new ArrayList<>(List.of(
-                                    Material.FIREWORK_STAR,
-                                    Material.FIREWORK_ROCKET
-                            ))
+                            new ArrayList<>(
+                                    List.of(Material.FIREWORK_ROCKET)
+                            )
                     ),
                     new ItemsBag(
                             "item_bag",
@@ -1365,11 +1378,11 @@ public class DefaultItem {
                                     .amount(1)
                                     .material(Material.PLAYER_HEAD)
                                     .base64("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTM3YTM1NTIyZjY3YjJhZjkyMzQ1NTkyODQ2YjcwMmI5YWZiOWQ3YzhkYmFkNWVhMTUwNjczYzllNDRkZTMifX19")
-                                    .displayname("#f2ff69Stop flying")
+                                    .displayname("#f2ff69Loot Bag")
                                     .lore(new ArrayList<>(
                                             List.of(
                                                     "&7",
-                                                    "#beff69× :)!",
+                                                    "#beff69Stores items from defeated players!",
                                                     "&7",
                                                     "&7• Usage: #beff69{usage}",
                                                     "&7"
@@ -1386,71 +1399,22 @@ public class DefaultItem {
                                     .sound(Sound.UI_BUTTON_CLICK)
                                     .build(),
                             54,
-                            "&0Items bag",
+                            "&0Items Bag",
                             ItemInventory.builder()
                                     .item(Item.builder()
                                             .amount(1)
                                             .material(Material.LIME_DYE)
-                                            .displayname("#beff69Withdraw items")
-                                            .lore(new ArrayList<>(List.of(
-                                                    "",
-                                                    "&7Click to withdraw all items",
-                                                    ""
-                                            )))
+                                            .displayname("#beff69Withdraw Items")
+                                            .lore(new ArrayList<>(
+                                                    List.of(
+                                                            "",
+                                                            "&7Click to withdraw all items",
+                                                            ""
+                                                    )
+                                            ))
                                             .build())
                                     .slot(53)
                                     .build()
-                    ),
-                    new ExplosionBallItem(
-                            "explosion_item",
-                            "explosion_item_category",
-                            -1,
-                            Item.builder()
-                                    .amount(1)
-                                    .material(Material.FIRE_CHARGE)
-                                    .displayname("#f2ff69Explosion ball")
-                                    .lore(new ArrayList<>(
-                                            List.of(
-                                                    "&7",
-                                                    "#beff69explosion-power: {explosion-power}!",
-                                                    "#beff69durability: {destroy-durability}!",
-                                                    "&7",
-                                                    "&7• Usage: #beff69{usage}",
-                                                    "&7"
-                                            )
-                                    ))
-                                    .unbreakable(true)
-                                    .glow(true)
-                                    .build(),
-                            ItemType.EXPLOSION_BALL,
-                            5,
-                            "getcustomitem.explosionball.bypass",
-                            SoundConfig.builder()
-                                    .enable(true)
-                                    .sound(Sound.UI_BUTTON_CLICK)
-                                    .build(),
-                            new ArrayList<>(
-                                    List.of("&7",
-                                            "#78ff69 × Example YOURSELF!",
-                                            "&7")
-                            ),
-                            new ArrayList<>(
-                                    List.of("&7",
-                                            "#78ff69 × Example OPPONENTS!",
-                                            "&7")
-                            ),
-                            new TitleMessage(false, "&aTitle Yourself", "&7Subtitle", 10, 20, 10),
-                            new TitleMessage(false, "&aTitle opponents", "&7Subtitle", 10, 20, 10),
-                            1.5f,
-                            25,
-                            new HashSet<>(Set.of(
-                                    Material.BEDROCK
-                            )),
-                            4f,
-                            false,
-                            true,
-                            true,
-                            0
                     ),
                     new ExplosionBallItem(
                             "explosion_durability",
@@ -1459,12 +1423,11 @@ public class DefaultItem {
                             Item.builder()
                                     .amount(1)
                                     .material(Material.FIRE_CHARGE)
-                                    .displayname("#f2ff69Explosion ball durability")
+                                    .displayname("#f2ff69Explosion Ball of Durability")
                                     .lore(new ArrayList<>(
                                             List.of(
                                                     "&7",
-                                                    "#beff69explosion-power: {explosion-power}!",
-                                                    "#beff69durability: {destroy-durability}!",
+                                                    "#beff69Explosion Power: {explosion-power}",
                                                     "&7",
                                                     "&7• Usage: #beff69{usage}",
                                                     "&7"
@@ -1481,22 +1444,101 @@ public class DefaultItem {
                                     .sound(Sound.UI_BUTTON_CLICK)
                                     .build(),
                             new ArrayList<>(
-                                    List.of("&7",
+                                    List.of(
+                                            "&7",
                                             "#78ff69 × Example YOURSELF!",
-                                            "&7")
+                                            "&7"
+                                    )
                             ),
                             new ArrayList<>(
-                                    List.of("&7",
+                                    List.of(
+                                            "&7",
                                             "#78ff69 × Example OPPONENTS!",
-                                            "&7")
+                                            "&7"
+                                    )
                             ),
-                            new TitleMessage(false, "&aTitle Yourself", "&7Subtitle", 10, 20, 10),
-                            new TitleMessage(false, "&aTitle opponents", "&7Subtitle", 10, 20, 10),
+                            new TitleMessage(
+                                    false,
+                                    "&aTitle Yourself",
+                                    "&7Subtitle",
+                                    10, 20, 10
+                            ),
+                            new TitleMessage(
+                                    false,
+                                    "&aTitle Opponents",
+                                    "&7Subtitle",
+                                    10, 20, 10
+                            ),
                             1.5f,
                             25,
-                            new HashSet<>(Set.of(
-                                    Material.BEDROCK
-                            )),
+                            new HashSet<>(
+                                    Set.of(Material.BEDROCK)
+                            ),
+                            5f,
+                            false,
+                            true,
+                            true,
+                            0
+                    ),
+                    new ExplosionBallItem(
+                            "explosion_durability",
+                            "explosion_durability_category",
+                            -1,
+                            Item.builder()
+                                    .amount(1)
+                                    .material(Material.FIRE_CHARGE)
+                                    .displayname("#f2ff69Explosion Ball of Durability")
+                                    .lore(new ArrayList<>(
+                                            List.of(
+                                                    "&7",
+                                                    "#beff69Explosion Power: {explosion-power}",
+                                                    "#beff69Durability Cost: {destroy-durability}",
+                                                    "&7",
+                                                    "&7• Usage: #beff69{usage}",
+                                                    "&7"
+                                            )
+                                    ))
+                                    .unbreakable(true)
+                                    .glow(true)
+                                    .build(),
+                            ItemType.EXPLOSION_BALL,
+                            5,
+                            "getcustomitem.explosionitemdurability.bypass",
+                            SoundConfig.builder()
+                                    .enable(true)
+                                    .sound(Sound.UI_BUTTON_CLICK)
+                                    .build(),
+                            new ArrayList<>(
+                                    List.of(
+                                            "&7",
+                                            "#78ff69 × Example YOURSELF!",
+                                            "&7"
+                                    )
+                            ),
+                            new ArrayList<>(
+                                    List.of(
+                                            "&7",
+                                            "#78ff69 × Example OPPONENTS!",
+                                            "&7"
+                                    )
+                            ),
+                            new TitleMessage(
+                                    false,
+                                    "&aTitle Yourself",
+                                    "&7Subtitle",
+                                    10, 20, 10
+                            ),
+                            new TitleMessage(
+                                    false,
+                                    "&aTitle Opponents",
+                                    "&7Subtitle",
+                                    10, 20, 10
+                            ),
+                            1.5f,
+                            25,
+                            new HashSet<>(
+                                    Set.of(Material.BEDROCK)
+                            ),
                             5f,
                             false,
                             false,
@@ -1511,10 +1553,13 @@ public class DefaultItem {
                                     .amount(1)
                                     .material(Material.PLAYER_HEAD)
                                     .base64("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGYzMzNjNzNjODQ4OWE5Y2EzNWQ1NjAzMTMwOTE4Yjg3NjA5ODRlYjlkMzAyOGUzMGU3NDI0N2RmZjg3M2JmZSJ9fX0=")
-                                    .displayname("#9e9e9eCrown")
+                                    .displayname("#9e9e9eCrown of Looting")
                                     .lore(new ArrayList<>(
                                             List.of(
                                                     "&7",
+                                                    "&7Automatically sends dropped items",
+                                                    "&7from killed players directly",
+                                                    "&7to your inventory.",
                                                     "&7",
                                                     "&7• Usage: #666666{usage}",
                                                     "&7"
@@ -1531,11 +1576,18 @@ public class DefaultItem {
                                     .sound(Sound.UI_BUTTON_CLICK)
                                     .build(),
                             new ArrayList<>(
-                                    List.of("&7",
+                                    List.of(
+                                            "&7",
                                             "#78ff69 × Example YOURSELF!",
-                                            "&7")
+                                            "&7"
+                                    )
                             ),
-                            new TitleMessage(false, "&aTitle Yourself", "&7Subtitle", 10, 20, 10)
+                            new TitleMessage(
+                                    false,
+                                    "&aTitle Yourself",
+                                    "&7Subtitle",
+                                    10, 20, 10
+                            )
                     ),
                     new ReflectionEffectItem(
                             "reflection_effect",
@@ -1548,7 +1600,7 @@ public class DefaultItem {
                                     .lore(new ArrayList<>(
                                             List.of(
                                                     "&7",
-                                                    "#a74fff× get damage and give effect",
+                                                    "#a74fff× Get damage and give effect",
                                                     "#a74fff  Chance: &f{chance}%",
                                                     "&7",
                                                     "&7• Usage: #a74fff{usage}",
@@ -1566,17 +1618,31 @@ public class DefaultItem {
                                     .sound(Sound.BLOCK_ENCHANTMENT_TABLE_USE)
                                     .build(),
                             new ArrayList<>(
-                                    List.of("&7",
+                                    List.of(
+                                            "&7",
                                             "#78ff69 × Example YOURSELF!",
-                                            "&7")
+                                            "&7"
+                                    )
                             ),
                             new ArrayList<>(
-                                    List.of("&7",
+                                    List.of(
+                                            "&7",
                                             "#78ff69 × Example OPPONENTS!",
-                                            "&7")
+                                            "&7"
+                                    )
                             ),
-                            new TitleMessage(false, "&aTitle Yourself", "&7Subtitle", 10, 20, 10),
-                            new TitleMessage(false, "&aTitle opponents", "&7Subtitle", 10, 20, 10),
+                            new TitleMessage(
+                                    false,
+                                    "&aTitle Yourself",
+                                    "&7Subtitle",
+                                    10, 20, 10
+                            ),
+                            new TitleMessage(
+                                    false,
+                                    "&aTitle Opponents",
+                                    "&7Subtitle",
+                                    10, 20, 10
+                            ),
                             new ArrayList<>(
                                     List.of(
                                             new PotionEffectConfig("SPEED", 5, 1)
@@ -1585,9 +1651,9 @@ public class DefaultItem {
                             50,
                             false,
                             true,
-                            new HashSet<>(Set.of(
-                                    EquipmentSlot.HEAD
-                            ))
+                            new HashSet<>(
+                                    Set.of(EquipmentSlot.HEAD)
+                            )
                     ),
                     new ItemTier(
                             "excalibur_tier",

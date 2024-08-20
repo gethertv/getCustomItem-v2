@@ -5,7 +5,6 @@ import dev.gether.getconfig.utils.ItemBuilder;
 import dev.gether.getconfig.utils.MessageUtil;
 import dev.gether.getcustomitem.GetCustomItem;
 import dev.gether.getcustomitem.file.FileManager;
-import dev.gether.getcustomitem.file.config.Config;
 import dev.gether.getcustomitem.cooldown.CooldownManager;
 import dev.gether.getcustomitem.item.CustomItem;
 import dev.gether.getcustomitem.item.ItemManager;

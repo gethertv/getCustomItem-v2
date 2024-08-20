@@ -161,7 +161,11 @@ public abstract class CustomItem extends GetConfig {
             @Override
             public void run() {
                 if (entity.isValid()) {
-                    double distanceTraveled = entity.getLocation().distanceSquared(startLocation);
+                    double distanceTraveled = entity.getLocation().distance(startLocation);
+                    if(entity.isOnGround()) {
+                        entity.remove();
+                        this.cancel();
+                    }
                     if (distanceTraveled >= maxRange) {
                         entity.remove();
                         this.cancel();

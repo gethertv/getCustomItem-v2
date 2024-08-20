@@ -1,7 +1,6 @@
 package dev.gether.getcustomitem.item.customize;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldguard.protection.flags.Flags;
 import dev.gether.getconfig.domain.Item;
 import dev.gether.getconfig.domain.config.TitleMessage;

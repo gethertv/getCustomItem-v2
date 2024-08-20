@@ -37,7 +37,7 @@ public class EffectTask extends BukkitRunnable {
 
                         if(ItemUtil.sameItem(itemStack, itemEffect.getItemStack())) {
                             // verify a value to usage of item
-                            itemEffect.takeUsage(player, itemStack, EquipmentSlot.HAND);
+                            itemEffect.takeUsage(player, itemStack, equipmentSlot);
 
                             List<PotionEffect> activePotionEffect = PotionConverUtil.getPotionEffectFromConfig(itemEffect.getPotionEffectConfigs());
                             activePotionEffect.forEach(player::addPotionEffect);
