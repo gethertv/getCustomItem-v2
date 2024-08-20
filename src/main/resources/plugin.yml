@@ -1,0 +1,8 @@
+name: getCustomItem
+version: '${project.version}'
+main: dev.gether.getcustomitem.GetCustomItem
+api-version: '1.16'
+softdepend: [WorldGuard, getPlayerDrop, DeluxeCombat, CombatLogX, PvPManager]
+libraries:
+  - com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.0
+  - com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.13.0
