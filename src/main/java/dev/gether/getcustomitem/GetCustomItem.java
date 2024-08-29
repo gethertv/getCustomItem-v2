@@ -1,5 +1,6 @@
 package dev.gether.getcustomitem;
 
+import dev.gether.getconfig.utils.MessageUtil;
 import dev.gether.getcustomitem.bstats.Metrics;
 import dev.gether.getcustomitem.cmd.CustomItemCommand;
 import dev.gether.getcustomitem.cmd.arg.CustomItemArg;
@@ -54,6 +55,7 @@ public final class GetCustomItem extends JavaPlugin {
 
         // managers
         itemManager = new ItemManager(fileManager);
+        MessageUtil.broadcast("XXXXX: "+itemManager.findAllCustomItemByType(ItemType.ITEM_TIER).size());
 
         List<CustomItem> allCustomItemByType = itemManager.findAllCustomItemByType(ItemType.ITEMS_BAG);
         if(!allCustomItemByType.isEmpty()) {
@@ -69,7 +71,7 @@ public final class GetCustomItem extends JavaPlugin {
             itemBagManager = new ItemBagManager(this, fileManager, itemBagService, itemManager);
 
         }
-        itemManager.initItems();
+//        itemManager.initItems();
 
         CooldownManager cooldownManager = new CooldownManager(fileManager);
         FrozenManager frozenManager = new FrozenManager();

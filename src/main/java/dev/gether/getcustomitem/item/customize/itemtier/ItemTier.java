@@ -14,6 +14,8 @@ import dev.gether.getcustomitem.item.ItemType;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.NamespacedKey;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
@@ -245,7 +247,7 @@ public class ItemTier extends CustomItem {
         Integer usage = itemStack.getItemMeta().getPersistentDataContainer().get(namespacedKey, PersistentDataType.INTEGER);
         int slot = ItemUtil.removeItem(player, itemStack);
         TierData tierDataItem = this.tierData.get(level);
-        ItemStack item = tierDataItem.getItemStack();
+        ItemStack item = tierDataItem.getItemStack().clone();
         ItemMeta itemMeta = item.getItemMeta();
         if (itemMeta != null) {
             itemMeta.getPersistentDataContainer().set(ITEM_TIER_PROGRESS, PersistentDataType.DOUBLE, rest);
@@ -254,6 +256,7 @@ public class ItemTier extends CustomItem {
             item.setItemMeta(itemMeta);
         }
         updateItem(item);
+
         player.getInventory().setItem(slot, item);
     }
 }

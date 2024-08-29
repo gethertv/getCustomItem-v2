@@ -3,6 +3,7 @@ package dev.gether.getcustomitem.cmd;
 import dev.gether.getconfig.utils.MessageUtil;
 import dev.gether.getcustomitem.GetCustomItem;
 import dev.gether.getcustomitem.item.CustomItem;
+import dev.gether.getcustomitem.item.ItemType;
 import dev.rollczi.litecommands.annotations.argument.Arg;
 import dev.rollczi.litecommands.annotations.command.Command;
 import dev.rollczi.litecommands.annotations.context.Context;
@@ -63,9 +64,10 @@ public class CustomItemCommand {
     @Execute(name = "reload")
     public void reloadConfig(@Context CommandSender commandSender) {
         //  reload config
+        MessageUtil.broadcast("1size: "+plugin.getItemManager().findAllCustomItemByType(ItemType.ITEM_TIER).size());
         plugin.getFileManager().reload();
-        plugin.getFileManager().loadItems();
-        plugin.getItemManager().initItems();
+        MessageUtil.broadcast("2size: "+plugin.getItemManager().findAllCustomItemByType(ItemType.ITEM_TIER).size());
+        MessageUtil.broadcast("3size: "+plugin.getItemManager().findAllCustomItemByType(ItemType.ITEM_TIER).size());
         MessageUtil.sendMessage(commandSender, "#40ff76Successfully reloaded config!");
 
     }

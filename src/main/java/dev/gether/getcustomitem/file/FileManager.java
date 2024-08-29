@@ -53,10 +53,13 @@ public class FileManager {
     }
 
     public void reload() {
+        langConfig.load();
         config.load();
-        customItems.clear();
         initDefaultItems();
+        customItems.clear();
+
         loadItems();
+
     }
 
     public void loadItems() {
@@ -67,7 +70,11 @@ public class FileManager {
         if(config.isDefaultItems()) {
             DefaultItem defaultItem = new DefaultItem();
             defaultItem.getCustomItems().forEach(customItem -> {
-                customItem.file(new File(FILE_PATH_ITEMS, "{name}.yml".replace("{name}", customItem.getKey())));
+                File file = new File(FILE_PATH_ITEMS, "{name}.yml".replace("{name}", customItem.getKey()));
+                if(file.exists())
+                    return;
+
+                customItem.file(file);
                 customItem.load();
             });
         }
