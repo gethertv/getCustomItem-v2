@@ -66,10 +66,7 @@ public class CustomItemCommand {
     @Execute(name = "reload")
     public void reloadConfig(@Context CommandSender commandSender) {
         //  reload config
-        MessageUtil.broadcast("1size: "+plugin.getItemManager().findAllCustomItemByType(ItemType.ITEM_TIER).size());
         plugin.getFileManager().reload();
-        MessageUtil.broadcast("2size: "+plugin.getItemManager().findAllCustomItemByType(ItemType.ITEM_TIER).size());
-        MessageUtil.broadcast("3size: "+plugin.getItemManager().findAllCustomItemByType(ItemType.ITEM_TIER).size());
         MessageUtil.sendMessage(commandSender, "#40ff76Successfully reloaded config!");
 
     }
