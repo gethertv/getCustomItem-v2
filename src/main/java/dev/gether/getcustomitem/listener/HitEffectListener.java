@@ -3,8 +3,8 @@ package dev.gether.getcustomitem.listener;
 import com.sk89q.worldguard.protection.flags.Flags;
 import dev.gether.getconfig.utils.MessageUtil;
 import dev.gether.getconfig.utils.PotionConverUtil;
-import dev.gether.getcustomitem.file.FileManager;
 import dev.gether.getcustomitem.cooldown.CooldownManager;
+import dev.gether.getcustomitem.file.FileManager;
 import dev.gether.getcustomitem.item.CustomItem;
 import dev.gether.getcustomitem.item.ItemManager;
 import dev.gether.getcustomitem.item.ItemType;
@@ -13,7 +13,6 @@ import dev.gether.getcustomitem.item.customize.HitEffectItem;
 import dev.gether.getcustomitem.utils.WorldGuardUtil;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -45,7 +44,7 @@ public class HitEffectListener implements Listener {
 
         if(event.getDamager() instanceof Player damager &&
                 event.getEntity() instanceof Player victim
-            ) {
+        ) {
 
             ItemStack itemStack = damager.getInventory().getItemInMainHand();
             Optional<CustomItem> customItemByType = itemManager.findCustomItemByType(ItemType.HIT_EFFECT, itemStack);

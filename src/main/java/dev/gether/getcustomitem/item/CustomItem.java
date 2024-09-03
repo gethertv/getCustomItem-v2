@@ -1,15 +1,15 @@
 package dev.gether.getcustomitem.item;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import dev.gether.getconfig.GetConfig;
 import dev.gether.getconfig.domain.Item;
 import dev.gether.getconfig.domain.config.TitleMessage;
 import dev.gether.getconfig.domain.config.sound.SoundConfig;
-import dev.gether.getconfig.utils.*;
+import dev.gether.getconfig.utils.ColorFixer;
+import dev.gether.getconfig.utils.ItemUtil;
+import dev.gether.getconfig.utils.MessageUtil;
+import dev.gether.getconfig.utils.PlayerUtil;
 import dev.gether.getcustomitem.GetCustomItem;
-import dev.gether.getcustomitem.item.customize.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,41 +28,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-//@JsonTypeInfo(use = JsonTypeInfo.Id.NAME,
-//        include = JsonTypeInfo.As.PROPERTY, property = "type")
-//@JsonSubTypes({
-//        @JsonSubTypes.Type(value = HookItem.class, name = "hook"),
-//        @JsonSubTypes.Type(value = CrossBowItem.class, name = "crossbow"),
-//        @JsonSubTypes.Type(value = CobwebGrenade.class, name = "cobweb_grenade"),
-//        @JsonSubTypes.Type(value = EffectRadiusItem.class, name = "effect_radius"),
-//        @JsonSubTypes.Type(value = FrozenSword.class, name = "frozen_sword"),
-//        @JsonSubTypes.Type(value = AntyCobweb.class, name = "anty_cobweb"),
-//        @JsonSubTypes.Type(value = BearFurItem.class, name = "bear_fur"),
-//        @JsonSubTypes.Type(value = MagicTotemItem.class, name = "magic_totem"),
-//        @JsonSubTypes.Type(value = HitEffectItem.class, name = "hit_effect"),
-//        @JsonSubTypes.Type(value = SnowballTPItem.class, name = "snowball_tp"),
-//        @JsonSubTypes.Type(value = InstaHealItem.class, name = "insta_heal"),
-//        @JsonSubTypes.Type(value = PushItem.class, name = "push_item"),
-//        @JsonSubTypes.Type(value = EggThrowItItem.class, name = "egg_throw_it"),
-//        @JsonSubTypes.Type(value = ItemEffect.class, name = "item_effect"),
-//        @JsonSubTypes.Type(value = LightningItem.class, name = "lighting_item"),
-//        @JsonSubTypes.Type(value = ShieldItem.class, name = "shield_item"),
-//        @JsonSubTypes.Type(value = ThrowingEnderPearlsItem.class, name = "throwing_ender_pearls"),
-//        @JsonSubTypes.Type(value = ThrowUpItem.class, name = "throw_up"),
-//        @JsonSubTypes.Type(value = CupidBowItem.class, name = "cubid_bow"),
-//        @JsonSubTypes.Type(value = ShuffleInventoryItem.class, name = "shuffle_inv_item"),
-//        @JsonSubTypes.Type(value = StopFlyingItem.class, name = "stop_flying"),
-//})
-
 public abstract class CustomItem extends GetConfig {
     @JsonIgnore
     protected NamespacedKey namespacedKey;
+    @JsonIgnore
+    private NamespacedKey itemKey;
     private boolean enabled = true;
     private String key;
     private String categoryName;
@@ -80,9 +55,6 @@ public abstract class CustomItem extends GetConfig {
     @JsonIgnore
     private ItemStack itemStack;
 
-//    public CustomItem() {
-//        this.namespacedKey = new NamespacedKey(GetCustomItem.getInstance(), key+"_usage");
-//    }
 
     public CustomItem(String key,
                       String categoryName,
@@ -97,6 +69,7 @@ public abstract class CustomItem extends GetConfig {
                       TitleMessage titleYourself,
                       TitleMessage titleOpponents) {
         this.namespacedKey = new NamespacedKey(GetCustomItem.getInstance(), key+"_usage");
+        this.itemKey = new NamespacedKey(GetCustomItem.getInstance(), key);
         this.key = key;
         this.categoryName = categoryName;
         this.usage = usage;
@@ -113,6 +86,7 @@ public abstract class CustomItem extends GetConfig {
 
     public void init() {
         this.namespacedKey = new NamespacedKey(GetCustomItem.getInstance(), key+"_usage");
+        this.itemKey = new NamespacedKey(GetCustomItem.getInstance(), key);
         itemStack = item.getItemStack().clone();
         ItemMeta itemMeta = itemStack.getItemMeta();
 
@@ -120,6 +94,7 @@ public abstract class CustomItem extends GetConfig {
 
             // set usage to persistent data
             itemMeta.getPersistentDataContainer().set(namespacedKey, PersistentDataType.INTEGER, usage);
+            itemMeta.getPersistentDataContainer().set(itemKey, PersistentDataType.STRING, getKey());
 
             List<String> lore = new ArrayList<>();
             if (itemMeta.hasLore())
@@ -175,6 +150,13 @@ public abstract class CustomItem extends GetConfig {
                 }
             }
         }.runTaskTimer(GetCustomItem.getInstance(), 1L, 1L);
+    }
+
+    @JsonIgnore
+    public boolean isCustomItem(ItemStack item) {
+        if (item == null || !item.hasItemMeta()) return false;
+        ItemMeta meta = item.getItemMeta();
+        return meta != null && meta.getPersistentDataContainer().has(itemKey, PersistentDataType.STRING);
     }
 
     public void takeAmount(ItemStack itemStack) {

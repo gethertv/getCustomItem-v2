@@ -42,7 +42,7 @@ public class ShuffleInvListener implements Listener {
 
         if(event.getDamager() instanceof Player damager &&
                 event.getEntity() instanceof Player victim
-            ) {
+        ) {
 
             ItemStack itemStack = damager.getInventory().getItemInMainHand();
             Optional<CustomItem> customItemByType = itemManager.findCustomItemByType(ItemType.SHUFFLE_ITEM, itemStack);

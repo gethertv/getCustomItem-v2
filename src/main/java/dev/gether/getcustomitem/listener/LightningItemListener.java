@@ -2,9 +2,8 @@ package dev.gether.getcustomitem.listener;
 
 import com.sk89q.worldguard.protection.flags.Flags;
 import dev.gether.getconfig.utils.MessageUtil;
-import dev.gether.getcustomitem.file.FileManager;
-import dev.gether.getcustomitem.file.config.Config;
 import dev.gether.getcustomitem.cooldown.CooldownManager;
+import dev.gether.getcustomitem.file.FileManager;
 import dev.gether.getcustomitem.item.CustomItem;
 import dev.gether.getcustomitem.item.ItemManager;
 import dev.gether.getcustomitem.item.ItemType;
@@ -15,6 +14,7 @@ import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockIgniteEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
@@ -93,6 +93,7 @@ public class LightningItemListener implements Listener {
 
                     LightningStrike lightning = (LightningStrike) victim.getWorld().spawnEntity(victim.getLocation(), EntityType.LIGHTNING);
                     lightning.setFireTicks(0);
+
 //                    victim.getWorld().strikeLightningEffect(victim.getLocation());
                     double maxHealth = victim.getMaxHealth();
                     double damageAmount = maxHealth * lightningItem.getMultiplyDamage();
@@ -107,6 +108,13 @@ public class LightningItemListener implements Listener {
                 );
             }
 
+        }
+    }
+
+    @EventHandler
+    public void onBlockIgnite(BlockIgniteEvent event) {
+        if (event.getCause() == BlockIgniteEvent.IgniteCause.LIGHTNING) {
+            event.setCancelled(true);
         }
     }
 

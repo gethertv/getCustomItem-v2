@@ -9,6 +9,7 @@ import dev.gether.getcustomitem.item.ItemManager;
 import dev.gether.getcustomitem.item.ItemType;
 import dev.gether.getcustomitem.item.customize.PushItem;
 import dev.gether.getcustomitem.utils.WorldGuardUtil;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -78,7 +79,16 @@ public class PushItemListener implements Listener {
                 double winTicket = random.nextDouble() * 100;
                 if (winTicket <= pushItem.getChance()) {
 
-                    // particles and sound
+                    // calculate the direction and final position
+                    Vector direction = damager.getLocation().getDirection().normalize().multiply(pushItem.getPushPower());
+                    Location finalLocation = victim.getLocation().add(direction);
+
+                    // check if the final location is in a non-PvP zone
+                    if (WorldGuardUtil.isDeniedFlag(finalLocation, victim, Flags.PVP)) {
+                        return;
+                    }
+
+                    // if it's safe to push, proceed with the push
                     pushItem.playSound(damager.getLocation()); // play sound
 
                     // verify a value to usage of item
@@ -86,10 +96,9 @@ public class PushItemListener implements Listener {
 
                     // alerts
                     pushItem.notifyYourself(damager);
-
                     pushItem.notifyOpponents(victim); // alert opponent
 
-                    Vector direction = damager.getLocation().getDirection().normalize().multiply(pushItem.getPushPower());
+                    // Apply the push
                     victim.setVelocity(direction);
 
                 }

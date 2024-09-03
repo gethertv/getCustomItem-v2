@@ -1,7 +1,6 @@
 package dev.gether.getcustomitem.listener;
 
 import com.sk89q.worldguard.protection.flags.Flags;
-import dev.gether.getconfig.utils.ItemUtil;
 import dev.gether.getconfig.utils.MessageUtil;
 import dev.gether.getconfig.utils.PotionConverUtil;
 import dev.gether.getcustomitem.cooldown.CooldownManager;
@@ -9,14 +8,11 @@ import dev.gether.getcustomitem.file.FileManager;
 import dev.gether.getcustomitem.item.CustomItem;
 import dev.gether.getcustomitem.item.ItemManager;
 import dev.gether.getcustomitem.item.ItemType;
-import dev.gether.getcustomitem.item.customize.FrozenSword;
-import dev.gether.getcustomitem.item.customize.HitEffectItem;
 import dev.gether.getcustomitem.item.customize.ReflectionEffectItem;
 import dev.gether.getcustomitem.utils.WorldGuardUtil;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -77,7 +73,7 @@ public class ReflectionEffectListener implements Listener {
             if(item==null || item.getType()== Material.AIR)
                 continue;
 
-            if(!ItemUtil.sameItem(item, reflectionEffectItem.getItemStack()))
+            if(!reflectionEffectItem.isCustomItem(item))
                 continue;
 
             /* world-guard section */
@@ -89,11 +85,11 @@ public class ReflectionEffectListener implements Listener {
                 return;
             }
 
-            double cooldownSeconds = cooldownManager.getCooldownSecond(victim, reflectionEffectItem);
-            if(cooldownSeconds <= 0 || victim.hasPermission(reflectionEffectItem.getPermissionBypass())) {
+            double cooldownSeconds = cooldownManager.getCooldownSecond(damager, reflectionEffectItem);
+            if(cooldownSeconds <= 0 || damager.hasPermission(reflectionEffectItem.getPermissionBypass())) {
 
                 // set cooldown
-                cooldownManager.setCooldown(victim, reflectionEffectItem);
+                cooldownManager.setCooldown(damager, reflectionEffectItem);
 
                 double winTicket = random.nextDouble() * 100;
                 if(winTicket <= reflectionEffectItem.getChance()) {
@@ -105,9 +101,9 @@ public class ReflectionEffectListener implements Listener {
                     reflectionEffectItem.takeUsage(damager, item, EquipmentSlot.HAND);
 
                     // alerts
-                    reflectionEffectItem.notifyYourself(victim);
+                    reflectionEffectItem.notifyYourself(damager);
 
-                    reflectionEffectItem.notifyOpponents(damager); // alert opponent
+                    reflectionEffectItem.notifyOpponents(victim); // alert opponent
 
                     if(reflectionEffectItem.isOpponents()) {
                         giveEffect(damager, reflectionEffectItem);
@@ -119,7 +115,7 @@ public class ReflectionEffectListener implements Listener {
                 }
 
             } else {
-                MessageUtil.sendMessage(victim, fileManager.getLangConfig().getHasCooldown().replace("{time}", String.valueOf(cooldownSeconds)));
+                MessageUtil.sendMessage(damager, fileManager.getLangConfig().getHasCooldown().replace("{time}", String.valueOf(cooldownSeconds)));
             }
         }
     }
@@ -133,20 +129,22 @@ public class ReflectionEffectListener implements Listener {
      * cancel place/use custom item
      * @param event
      */
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
-        if(event.isCancelled()) return;
-
         ItemStack itemStack = event.getItem(); // using item
 
         if(itemStack == null)
             return;
 
         Optional<CustomItem> customItemByType = itemManager.findCustomItemByType(ItemType.REFLECTION_EFFECT, itemStack);
-        if (customItemByType.isEmpty() || !(customItemByType.get() instanceof FrozenSword))
+        if (customItemByType.isEmpty() || !(customItemByType.get() instanceof ReflectionEffectItem))
             return;
 
         event.setCancelled(true);
     }
+
+
+
+
 
 }

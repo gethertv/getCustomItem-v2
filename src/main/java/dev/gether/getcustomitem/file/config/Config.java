@@ -4,6 +4,11 @@ import dev.gether.getconfig.GetConfig;
 import dev.gether.getconfig.annotation.Comment;
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.Location;
+import org.bukkit.entity.EntityType;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -21,5 +26,12 @@ public class Config extends GetConfig {
     })
     private String discord = "https://dc.gether.dev";
     private boolean defaultItems = true;
+
+    private Location spawnLocation = null;
+
+    private String cooldownMessage = "&cMusisz odczekac {time}";
+    private Map<Object, Integer> cooldown = new HashMap<>(Map.of(
+            EntityType.PLAYER, 15
+    ));
 
 }

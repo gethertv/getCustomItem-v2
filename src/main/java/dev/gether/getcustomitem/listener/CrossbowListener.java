@@ -4,8 +4,8 @@ import com.sk89q.worldguard.protection.flags.Flags;
 import dev.gether.getconfig.utils.ItemBuilder;
 import dev.gether.getconfig.utils.MessageUtil;
 import dev.gether.getcustomitem.GetCustomItem;
-import dev.gether.getcustomitem.file.FileManager;
 import dev.gether.getcustomitem.cooldown.CooldownManager;
+import dev.gether.getcustomitem.file.FileManager;
 import dev.gether.getcustomitem.item.CustomItem;
 import dev.gether.getcustomitem.item.ItemManager;
 import dev.gether.getcustomitem.item.ItemType;
@@ -71,8 +71,8 @@ public class CrossbowListener implements Listener {
         if(!crossbowMeta.hasChargedProjectiles()) {
             event.setCancelled(true);
             crossbowMeta.addChargedProjectile(ItemBuilder.of(Material.FIREWORK_ROCKET)
-                            .name("headshot")
-                            .glow(true)
+                    .name("headshot")
+                    .glow(true)
                     .build());
 
             itemStack.setItemMeta(crossbowMeta);
@@ -147,6 +147,7 @@ public class CrossbowListener implements Listener {
             if(WorldGuardUtil.isDeniedFlag(shooter.getLocation(), shooter, Flags.PVP)) {
                 return;
             }
+
 
             // check is not the npc
             boolean isCitizensNPC = hitPlayer.hasMetadata("NPC");

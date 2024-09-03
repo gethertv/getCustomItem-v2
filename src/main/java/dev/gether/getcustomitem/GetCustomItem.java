@@ -55,7 +55,6 @@ public final class GetCustomItem extends JavaPlugin {
 
         // managers
         itemManager = new ItemManager(fileManager);
-        MessageUtil.broadcast("XXXXX: "+itemManager.findAllCustomItemByType(ItemType.ITEM_TIER).size());
 
         List<CustomItem> allCustomItemByType = itemManager.findAllCustomItemByType(ItemType.ITEMS_BAG);
         if(!allCustomItemByType.isEmpty()) {
@@ -86,7 +85,7 @@ public final class GetCustomItem extends JavaPlugin {
                 new EffectRadiusListener(itemManager, cooldownManager, fileManager),
                 new FrozenSwordListener(itemManager, cooldownManager, fileManager, frozenManager),
                 new AntyCobwebListener(itemManager, cooldownManager, fileManager),
-                new MagicTotemListener(itemManager, cooldownManager, fileManager, magicTotemManager),
+                new MagicTotemListener(itemManager, cooldownManager, fileManager),
                 new BearFurListener(itemManager, cooldownManager, bearFurReducedManager, fileManager),
                 new HitEffectListener(itemManager, cooldownManager, fileManager),
                 new PlayerQuitListener(bearFurReducedManager, cooldownManager, frozenManager),
@@ -106,6 +105,7 @@ public final class GetCustomItem extends JavaPlugin {
                 new ExplosionBallListener(itemManager, cooldownManager, fileManager),
                 new DropToInventoryItemListener(itemManager, cooldownManager, fileManager),
                 new ReflectionEffectListener(itemManager, cooldownManager, fileManager),
+                new PokeballListener(itemManager, cooldownManager, fileManager),
                 new PrepareAnvilListener(itemManager)
         ).forEach(listener -> getServer().getPluginManager().registerEvents(listener, this));
 

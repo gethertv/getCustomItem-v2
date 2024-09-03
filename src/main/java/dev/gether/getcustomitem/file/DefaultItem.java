@@ -1143,7 +1143,7 @@ public class DefaultItem {
                             new TitleMessage(false, "&aTitle Yourself", "&7Subtitle", 10, 20, 10),
                             new TitleMessage(false, "&aTitle Opponents", "&7Subtitle", 10, 20, 10),
                             new ArrayList<>(List.of(
-                                    EquipmentSlot.HEAD
+                                    EquipmentSlot.HAND
                             )),
                             new ArrayList<>(
                                     List.of(
@@ -1654,6 +1654,65 @@ public class DefaultItem {
                             new HashSet<>(
                                     Set.of(EquipmentSlot.HEAD)
                             )
+                    ),
+                    new PokeballItem(
+                            "poke_ball",
+                            "poke_ball",
+                            -1,
+                            Item.builder()
+                                    .amount(1)
+                                    .material(Material.HEART_OF_THE_SEA)
+                                    .displayname("#8c19ffPokeball")
+                                    .lore(new ArrayList<>(
+                                            List.of(
+                                                    "&7",
+                                                    "#a74fff× Hit the player and get",
+                                                    "#a74fff  a chance to teleport them to you",
+                                                    "#a74fff  Chance: &f{chance}",
+                                                    "&7",
+                                                    "&7• Usage: #a74fff{usage}",
+                                                    "&7"
+                                            )
+                                    ))
+                                    .unbreakable(true)
+                                    .glow(true)
+                                    .build(),
+                            ItemType.POKE_BALL,
+                            10,
+                            "getcustomitem.pokeball.bypass",
+                            SoundConfig.builder()
+                                    .enable(true)
+                                    .sound(Sound.BLOCK_ENCHANTMENT_TABLE_USE)
+                                    .build(),
+                            new ArrayList<>(
+                                    List.of(
+                                            "&7",
+                                            "#78ff69 × Example YOURSELF!",
+                                            "&7"
+                                    )
+                            ),
+                            new ArrayList<>(
+                                    List.of(
+                                            "&7",
+                                            "#78ff69 × Example OPPONENTS!",
+                                            "&7"
+                                    )
+                            ),
+                            new TitleMessage(
+                                    false,
+                                    "&aTitle Yourself",
+                                    "&7Subtitle",
+                                    10, 20, 10
+                            ),
+                            new TitleMessage(
+                                    false,
+                                    "&aTitle Opponents",
+                                    "&7Subtitle",
+                                    10, 20, 10
+                            ),
+                            3,
+                            50,
+                            25
                     ),
                     new ItemTier(
                             "excalibur_tier",

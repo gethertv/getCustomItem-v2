@@ -2,9 +2,8 @@ package dev.gether.getcustomitem.listener;
 
 import com.sk89q.worldguard.protection.flags.Flags;
 import dev.gether.getconfig.utils.MessageUtil;
-import dev.gether.getcustomitem.file.FileManager;
-import dev.gether.getcustomitem.file.config.Config;
 import dev.gether.getcustomitem.cooldown.CooldownManager;
+import dev.gether.getcustomitem.file.FileManager;
 import dev.gether.getcustomitem.item.CustomItem;
 import dev.gether.getcustomitem.item.ItemManager;
 import dev.gether.getcustomitem.item.ItemType;
@@ -14,7 +13,6 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Snowball;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.ProjectileHitEvent;
@@ -65,6 +63,9 @@ public class SnowballTeleport implements Listener {
 
         double cooldownSeconds = cooldownManager.getCooldownSecond(player, snowballTPItem);
         if (cooldownSeconds <= 0 || player.hasPermission(snowballTPItem.getPermissionBypass())) {
+
+            // set cooldown
+            cooldownManager.setCooldown(player, snowballTPItem);
 
             // particles and sound
             snowballTPItem.playSound(player.getLocation()); // play sound

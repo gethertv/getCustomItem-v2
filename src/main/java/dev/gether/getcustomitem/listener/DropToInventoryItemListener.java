@@ -83,7 +83,6 @@ public class DropToInventoryItemListener implements Listener {
 
         boolean itemDropToInv = findItemDropToInv(killer.getInventory());
         if (!itemDropToInv) {
-            MessageUtil.broadcast("cancel");
             return;
         }
 

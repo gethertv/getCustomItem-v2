@@ -4,9 +4,8 @@ import com.sk89q.worldguard.protection.flags.Flags;
 import dev.gether.getconfig.utils.MessageUtil;
 import dev.gether.getconfig.utils.PlayerUtil;
 import dev.gether.getconfig.utils.PotionConverUtil;
-import dev.gether.getcustomitem.file.FileManager;
-import dev.gether.getcustomitem.file.config.Config;
 import dev.gether.getcustomitem.cooldown.CooldownManager;
+import dev.gether.getcustomitem.file.FileManager;
 import dev.gether.getcustomitem.item.CustomItem;
 import dev.gether.getcustomitem.item.ItemManager;
 import dev.gether.getcustomitem.item.ItemType;
@@ -14,7 +13,6 @@ import dev.gether.getcustomitem.item.customize.EffectRadiusItem;
 import dev.gether.getcustomitem.utils.WorldGuardUtil;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -73,9 +71,6 @@ public class EffectRadiusListener implements Listener {
             // filter players from NPC and WorldGuard
             List<Player> players = filterPlayers(nearPlayers);
 
-            // particles and sound
-            effectRadiusItem.playSound(player.getLocation()); // play sound
-
             /* world-guard section */
             // check the using player is in PVP region
             if(WorldGuardUtil.isDeniedFlag(player.getLocation(), player, Flags.PVP)) {
@@ -90,6 +85,10 @@ public class EffectRadiusListener implements Listener {
 
                 effectRadiusItem.notifyOpponents(p);
             });
+
+
+            // particles and sound
+            effectRadiusItem.playSound(player.getLocation()); // play sound
 
             givePotionEffect(effectRadiusItem, player, players); // give potion effect
             removePotionEffect(effectRadiusItem, player, players); // remove potion effect
@@ -142,8 +141,8 @@ public class EffectRadiusListener implements Listener {
     }
 
     private void removePotionEffect(EffectRadiusItem effectRadiusItem,
-                                  Player player,
-                                  List<Player> nearPlayers) {
+                                    Player player,
+                                    List<Player> nearPlayers) {
         // check every player who can't be in the pvp region
         nearPlayers.forEach(p -> {
 

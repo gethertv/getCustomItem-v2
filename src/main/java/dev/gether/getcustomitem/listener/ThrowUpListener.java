@@ -135,4 +135,3 @@ public class ThrowUpListener implements Listener {
         });
     }
 }
-

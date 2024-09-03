@@ -178,8 +178,6 @@ public class ExplosionBallListener implements Listener {
             for (ItemStack armorPiece : player.getInventory().getArmorContents()) {
                 if (armorPiece != null && armorPiece.getType().getMaxDurability() > 0) {
                     ItemMeta meta = armorPiece.getItemMeta();
-                    if(meta == null || meta.isUnbreakable())
-                        continue;
 
                     if (meta instanceof Damageable) {
                         Damageable damageable = (Damageable) meta;

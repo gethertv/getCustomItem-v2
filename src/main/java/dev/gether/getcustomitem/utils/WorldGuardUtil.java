@@ -25,10 +25,12 @@ public class WorldGuardUtil {
         com.sk89q.worldedit.util.Location loc = BukkitAdapter.adapt(location);
 
         if(isInRegion(loc)) {
-            return !query.testState(loc, localPlayer, stateFlag);
+            boolean status = query.testState(loc, localPlayer, stateFlag);
+            return !status;
         } else {
             boolean status = canUseInGlobal(BukkitAdapter.adapt(location.getWorld()), stateFlag);
-            return location.getWorld() != null && !status;
+            boolean finalStatus = location.getWorld() != null && !status;
+            return !finalStatus;
         }
     }
 

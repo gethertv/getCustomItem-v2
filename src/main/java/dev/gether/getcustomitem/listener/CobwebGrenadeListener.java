@@ -1,10 +1,9 @@
+
 package dev.gether.getcustomitem.listener;
 
-import dev.gether.getconfig.utils.ItemUtil;
 import dev.gether.getconfig.utils.MessageUtil;
-import dev.gether.getcustomitem.file.FileManager;
-import dev.gether.getcustomitem.file.config.Config;
 import dev.gether.getcustomitem.cooldown.CooldownManager;
+import dev.gether.getcustomitem.file.FileManager;
 import dev.gether.getcustomitem.item.CustomItem;
 import dev.gether.getcustomitem.item.ItemManager;
 import dev.gether.getcustomitem.item.ItemType;
@@ -22,6 +21,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
+import java.util.List;
 import java.util.Optional;
 
 public class CobwebGrenadeListener implements Listener {
@@ -96,14 +96,18 @@ public class CobwebGrenadeListener implements Listener {
         Location location = event.getEntity().getLocation();
         ItemStack itemStack = potion.getItem();
 
-        Optional<CustomItem> customItemByType = itemManager.findCustomItemByType(ItemType.COBWEB_GRENADE, itemStack);
-        if(customItemByType.isEmpty())
+        List<CustomItem> allCustomItemByType = itemManager.findAllCustomItemByType(ItemType.COBWEB_GRENADE);
+        if(allCustomItemByType.isEmpty())
             return;
 
-        CobwebGrenade cobwebGrenade = (CobwebGrenade) customItemByType.get();
-        if(ItemUtil.sameItemName(itemStack, cobwebGrenade.getItem().getItemStack())) {
-            cobwebGrenade.spawnCobweb(location); // spawn cobweb
+        for (CustomItem customItemByType : allCustomItemByType) {
+            if (customItemByType instanceof CobwebGrenade cobwebGrenade) {
+                if (cobwebGrenade.isCustomItem(itemStack)) {
+                    cobwebGrenade.spawnCobweb(location); // spawn cobweb
+                }
+            }
         }
+
     }
 
 }

@@ -62,14 +62,12 @@ public class FrozenSwordListener implements Listener {
 
         if(event.getDamager() instanceof Player damager &&
                 event.getEntity() instanceof Player victim
-            ) {
+        ) {
 
             ItemStack itemStack = damager.getInventory().getItemInMainHand();
             Optional<CustomItem> customItemByType = itemManager.findCustomItemByType(ItemType.FROZEN_SWORD, itemStack);
             if(customItemByType.isEmpty() || !(customItemByType.get() instanceof FrozenSword frozenSword))
                 return;
-
-            event.setCancelled(true);
 
             // check the item is enabled / if not then cancel
             if(!frozenSword.isEnabled())

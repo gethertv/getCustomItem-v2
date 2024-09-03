@@ -7,15 +7,12 @@ import dev.gether.getconfig.domain.config.sound.SoundConfig;
 import dev.gether.getconfig.utils.ColorFixer;
 import dev.gether.getconfig.utils.IntegerToRoman;
 import dev.gether.getconfig.utils.ItemUtil;
-import dev.gether.getconfig.utils.MessageUtil;
 import dev.gether.getcustomitem.GetCustomItem;
 import dev.gether.getcustomitem.item.CustomItem;
 import dev.gether.getcustomitem.item.ItemType;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.NamespacedKey;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
@@ -258,5 +255,16 @@ public class ItemTier extends CustomItem {
         updateItem(item);
 
         player.getInventory().setItem(slot, item);
+    }
+
+    public boolean isMaxLevel(ItemStack itemStack) {
+        Optional<Integer> level = getLevel(itemStack);
+        if (level.isEmpty())
+            return true;
+        Integer lvl = level.get();
+        TierData tierData = this.tierData.get(Integer.valueOf(lvl.intValue() + 1));
+        if (tierData == null)
+            return true;
+        return false;
     }
 }

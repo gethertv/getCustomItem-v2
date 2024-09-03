@@ -30,6 +30,7 @@ public enum ItemType {
     ITEM_TIER(ItemTier.class),
     EXPLOSION_BALL(ExplosionBallItem.class),
     DROP_TO_INV(DropToInventoryItem.class),
+    POKE_BALL(PokeballItem.class),
     REFLECTION_EFFECT(ReflectionEffectItem.class);
 
     private final Class<? extends CustomItem> itemClass;

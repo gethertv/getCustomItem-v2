@@ -1,7 +1,6 @@
 package dev.gether.getcustomitem.cooldown;
 
 import dev.gether.getcustomitem.file.FileManager;
-import dev.gether.getcustomitem.file.config.Config;
 import dev.gether.getcustomitem.item.CustomItem;
 import org.bukkit.entity.Player;
 
@@ -74,5 +73,37 @@ public class CooldownManager {
             String key = getPlayerKeyItem(player, customItem);
             cooldowns.remove(key);
         });
+    }
+
+    public boolean isOnCooldown(String key) {
+        if (!cooldowns.containsKey(key)) {
+            return false;
+        }
+        return System.currentTimeMillis() < cooldowns.get(key);
+    }
+
+    /**
+     * Get the remaining cooldown time in milliseconds.
+     *
+     * @param key The cooldown key to check
+     * @return The remaining cooldown time in milliseconds, or 0 if no cooldown is active
+     */
+    public long getCooldownTime(String key) {
+        if (!cooldowns.containsKey(key)) {
+            return 0;
+        }
+        long cooldownTime = cooldowns.get(key) - System.currentTimeMillis();
+        return Math.max(cooldownTime, 0);
+    }
+
+    /**
+     * Set a cooldown for the given key.
+     *
+     * @param key The cooldown key to set
+     * @param seconds The duration of the cooldown in seconds
+     */
+    public void setCooldown(String key, int seconds) {
+        long cooldownTime = System.currentTimeMillis() + (seconds * 1000L);
+        cooldowns.put(key, cooldownTime);
     }
 }

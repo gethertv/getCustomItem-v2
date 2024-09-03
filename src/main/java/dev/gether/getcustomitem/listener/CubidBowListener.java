@@ -4,14 +4,12 @@ import com.sk89q.worldguard.protection.flags.Flags;
 import dev.gether.getconfig.utils.MessageUtil;
 import dev.gether.getconfig.utils.PotionConverUtil;
 import dev.gether.getcustomitem.GetCustomItem;
-import dev.gether.getcustomitem.file.FileManager;
-import dev.gether.getcustomitem.file.config.Config;
 import dev.gether.getcustomitem.cooldown.CooldownManager;
+import dev.gether.getcustomitem.file.FileManager;
 import dev.gether.getcustomitem.item.CustomItem;
 import dev.gether.getcustomitem.item.ItemManager;
 import dev.gether.getcustomitem.item.ItemType;
 import dev.gether.getcustomitem.item.customize.CupidBowItem;
-import dev.gether.getcustomitem.item.customize.ExplosionBallItem;
 import dev.gether.getcustomitem.utils.WorldGuardUtil;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
@@ -21,7 +19,6 @@ import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
-import org.bukkit.metadata.MetadataValue;
 import org.bukkit.potion.PotionEffect;
 
 import java.util.List;
@@ -115,7 +112,6 @@ public class CubidBowListener implements Listener {
                 if (WorldGuardUtil.isDeniedFlag(shooter.getLocation(), shooter, Flags.PVP)) {
                     return;
                 }
-
                 // check is not the npc
                 boolean isCitizensNPC = hitPlayer.hasMetadata("NPC");
                 if (isCitizensNPC) return;

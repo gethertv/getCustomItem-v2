@@ -1,9 +1,8 @@
 package dev.gether.getcustomitem.listener;
 
 import dev.gether.getconfig.utils.MessageUtil;
-import dev.gether.getcustomitem.file.FileManager;
-import dev.gether.getcustomitem.file.config.Config;
 import dev.gether.getcustomitem.cooldown.CooldownManager;
+import dev.gether.getcustomitem.file.FileManager;
 import dev.gether.getcustomitem.item.CustomItem;
 import dev.gether.getcustomitem.item.ItemManager;
 import dev.gether.getcustomitem.item.ItemType;
@@ -46,6 +45,12 @@ public class InstaHealListener implements Listener {
         if(itemStack == null)
             return;
 
+        Action action = event.getAction();
+        if(action != Action.RIGHT_CLICK_BLOCK && action != Action.RIGHT_CLICK_AIR) {
+            return;
+        }
+
+
         Optional<CustomItem> customItemByType = itemManager.findCustomItemByType(ItemType.INSTA_HEAL, itemStack);
         if (customItemByType.isEmpty() || !(customItemByType.get() instanceof InstaHealItem instaHealItem))
             return;
@@ -56,12 +61,6 @@ public class InstaHealListener implements Listener {
         if(!instaHealItem.isEnabled())
             return;
 
-
-
-        Action action = event.getAction();
-        if(action != Action.RIGHT_CLICK_BLOCK && action != Action.RIGHT_CLICK_AIR) {
-            return;
-        }
 
         double cooldownSeconds = cooldownManager.getCooldownSecond(player, instaHealItem);
         if(cooldownSeconds <= 0 || player.hasPermission(instaHealItem.getPermissionBypass())) {
