@@ -115,7 +115,7 @@ public class ReflectionEffectListener implements Listener {
                 }
 
             } else {
-                MessageUtil.sendMessage(damager, fileManager.getLangConfig().getHasCooldown().replace("{time}", String.valueOf(cooldownSeconds)));
+                //MessageUtil.sendMessage(damager, fileManager.getLangConfig().getHasCooldown().replace("{time}", String.valueOf(cooldownSeconds)));
             }
         }
     }

@@ -247,6 +247,7 @@ public class ItemTier extends CustomItem {
         ItemStack item = tierDataItem.getItemStack().clone();
         ItemMeta itemMeta = item.getItemMeta();
         if (itemMeta != null) {
+            itemMeta.getPersistentDataContainer().set(ITEM_KEY, PersistentDataType.BYTE, (byte) 1);
             itemMeta.getPersistentDataContainer().set(ITEM_TIER_PROGRESS, PersistentDataType.DOUBLE, rest);
             itemMeta.getPersistentDataContainer().set(ITEM_TIER, PersistentDataType.INTEGER, level);
             itemMeta.getPersistentDataContainer().set(namespacedKey, PersistentDataType.INTEGER, usage);

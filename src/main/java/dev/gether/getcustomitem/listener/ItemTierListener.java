@@ -93,10 +93,8 @@ public class ItemTierListener implements Listener {
         boolean status = itemTier.isItemTier(itemStack);
         if(!status)
             return;
-
         if(itemTier.isMaxLevel(itemStack))
             return;
-
 
         if (fileManager.getConfig().getCooldown().containsKey(entityType.toString())) {
             String playerUUID = player.getUniqueId().toString();
