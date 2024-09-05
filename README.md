@@ -6,15 +6,14 @@ getCustomItem is an advanced Spigot plugin that allows you to create and manage 
 
 ## 📋 Table of Contents
 
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [Commands](#commands)
-- [Creating Custom Items](#creating-custom-items)
-- [Pre-defined Custom Items](#pre-defined-custom-items)
-- [Configuration](#configuration)
-- [WorldGuard Integration](#worldguard-integration)
-- [Support](#support)
-- [License](#license)
+- [Requirements](#-requirements)
+- [Installation](#-installation)
+- [Commands](#-commands)
+- [Creating Custom Items](#️-creating-custom-items)
+- [Pre-defined Custom Items](#-pre-defined-custom-items)
+- [Configuration](#️-configuration)
+- [WorldGuard Integration](#-worldguard-integration)
+- [Support](#-support)
 
 ## 🔧 Requirements
 
