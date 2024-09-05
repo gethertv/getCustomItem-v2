@@ -1,6 +1,7 @@
 package dev.gether.getcustomitem.listener;
 
 import dev.gether.getconfig.utils.MessageUtil;
+import dev.gether.getconfig.utils.PlayerUtil;
 import dev.gether.getcustomitem.cooldown.CooldownManager;
 import dev.gether.getcustomitem.file.FileManager;
 import dev.gether.getcustomitem.item.CustomItem;
@@ -23,11 +24,9 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 public class ItemBagListener implements Listener {
 
@@ -35,6 +34,7 @@ public class ItemBagListener implements Listener {
     private final CooldownManager cooldownManager;
     private final FileManager fileManager;
     private final ItemBagManager itemBagManager;
+    private final Random random = new Random();
     public ItemBagListener(ItemManager itemManager,
                            CooldownManager cooldownManager,
                            FileManager fileManager,
@@ -79,6 +79,21 @@ public class ItemBagListener implements Listener {
             Action action = event.getAction();
             if(action != Action.RIGHT_CLICK_BLOCK && action != Action.RIGHT_CLICK_AIR) {
                 return;
+            }
+
+            int amount = itemStack.getAmount();
+            if (amount > 1) {
+                itemStack.setAmount(amount - 1);
+
+                ItemStack newItem = itemStack.clone();
+                newItem.setAmount(1);
+                ItemMeta meta = newItem.getItemMeta();
+                if (meta != null) {
+                    meta.setCustomModelData(getRandomCustomModelData());
+                    newItem.setItemMeta(meta);
+                }
+                PlayerUtil.giveItem(player, newItem);
+                itemStack = newItem;
             }
 
             double cooldownSeconds = cooldownManager.getCooldownSecond(player, itemsBag);
@@ -218,5 +233,9 @@ public class ItemBagListener implements Listener {
             }
         }
         return backpacks;
+    }
+
+    private int getRandomCustomModelData() {
+        return random.nextInt(1000000) + 1;
     }
 }
