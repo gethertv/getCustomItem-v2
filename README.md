@@ -101,7 +101,7 @@ getCustomItem integrates with WorldGuard for region-based item usage restriction
 ## 🆘 Support
 
 For support, bug reports, or feature requests:
-- [Open an issue](https://github.com/yourusername/getCustomItem-v2/issues)
+- [Open an issue](https://github.com/gethertv/getCustomItem-v2/issues)
 - [Join our Discord](https://dc.gether.dev/)
 
 ---
