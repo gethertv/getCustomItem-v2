@@ -11,6 +11,7 @@ import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
 import com.sk89q.worldguard.protection.regions.RegionQuery;
+import dev.gether.getconfig.utils.MessageUtil;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -29,7 +30,7 @@ public class WorldGuardUtil {
             return !status;
         } else {
             boolean status = canUseInGlobal(BukkitAdapter.adapt(location.getWorld()), stateFlag);
-            boolean finalStatus = location.getWorld() != null && !status;
+            boolean finalStatus = location.getWorld() != null && status;
             return !finalStatus;
         }
     }
@@ -49,7 +50,8 @@ public class WorldGuardUtil {
         RegionManager regions = container.get(world);
         if (regions != null) {
             ProtectedRegion globalRegion = regions.getRegion("__global__");
-            return globalRegion != null && globalRegion.getFlag(stateFlag) != StateFlag.State.DENY;
+            if(globalRegion == null) return true;
+            return globalRegion.getFlag(stateFlag) != StateFlag.State.DENY;
         }
         return true;
     }

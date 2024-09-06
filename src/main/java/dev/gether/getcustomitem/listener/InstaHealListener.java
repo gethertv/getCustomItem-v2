@@ -72,7 +72,7 @@ public class InstaHealListener implements Listener {
 
             // chance to insta heal
             if(random.nextDouble() < (instaHealItem.getChance() / 100d)) {
-                player.setHealth(player.getHealthScale());
+                player.setHealth(player.getAttribute(org.bukkit.attribute.Attribute.GENERIC_MAX_HEALTH).getValue());
 
                 // alert yourself
                 instaHealItem.notifyYourself(player);

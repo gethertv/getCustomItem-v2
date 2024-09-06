@@ -121,7 +121,7 @@ public class PokeballListener implements Listener {
         if (action != Action.RIGHT_CLICK_BLOCK && action != Action.RIGHT_CLICK_AIR)
             return;
 
-        double cooldownSeconds = this.cooldownManager.getCooldownSecond(player, (CustomItem)pokeballItem);
+        double cooldownSeconds = this.cooldownManager.getCooldownSecond(player, pokeballItem);
         if (cooldownSeconds <= 0.0D || player.hasPermission(pokeballItem.getPermissionBypass())) {
             this.cooldownManager.setCooldown(player, pokeballItem);
             pokeballItem.throwEntity(player);

@@ -126,8 +126,10 @@ public class ThrowUpListener implements Listener {
                 player.setVelocity(direction);
                 return;
             }
-            // if this option is disabled then don't give the effects players in radius
-            if(!tossUpwardItem.isOtherPlayers() && !p.getName().equalsIgnoreCase(player.getName()))
+            if(!tossUpwardItem.isOtherPlayers())
+                return;
+
+            if(p.getName().equalsIgnoreCase(player.getName()))
                 return;
 
             Vector direction = p.getLocation().getDirection().normalize().multiply(-tossUpwardItem.getPushOpponents());
