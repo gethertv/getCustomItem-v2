@@ -1,5 +1,3 @@
-Certainly! Here's a styled version of the documentation suitable for GitHub:
-
 # getCustomItem
 
 getCustomItem is an advanced Spigot plugin that allows you to create and manage custom items with unique properties and effects on your Minecraft server.
